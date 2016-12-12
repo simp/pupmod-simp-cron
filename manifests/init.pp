@@ -1,12 +1,14 @@
 # This class manages /etc/cron.allow and /etc/cron.deny and the
 # crond service.
 #
+# @param install_tmpwatch
+#   Force installation of the tmpwatch package.
 # @param users
 #   An array of additional cron users, using the defiend type cron::user.
 #
 class cron (
-  Boolean $install_tmpwatch,
-  Array[String] $users
+  Boolean       $install_tmpwatch = false,
+  Array[String] $users            = []
 ) {
 
   $users.each |String $user| {
