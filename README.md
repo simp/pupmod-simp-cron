@@ -10,15 +10,15 @@
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
-    * [Acceptance Tests - Beaker env variables](#acceptance-tests)
 
 
 ## Description
 
-This module manages the cron packges, service, and /etc/cron.allow.
+This module manages the cron packages, service, and /etc/cron.allow.
 
 
 ### This is a SIMP module
+
 This module is a component of the [System Integrity Management Platform](https://github.com/NationalSecurityAgency/SIMP), a compliance-management framework built on Puppet.
 
 If you find any issues, they can be submitted to our [JIRA](https://simp-project.atlassian.net/).
@@ -26,7 +26,6 @@ If you find any issues, they can be submitted to our [JIRA](https://simp-project
 This module is optimally designed for use within a larger SIMP ecosystem, but it can be used independently:
 
  * When included within the SIMP ecosystem, security compliance settings will be managed from the Puppet server.
- * If used independently, all SIMP-managed security subsystems are disabled by default and must be explicitly opted into by administrators.  Please review the `$client_nets`, `$enable_*` and `$use_*` parameters in `manifests/init.pp` for details.
 
 
 ## Setup
@@ -72,15 +71,3 @@ SIMP Puppet modules are generally intended for use on Red Hat Enterprise Linux a
 ## Development
 
 Please read our [Contribution Guide] (http://simp-doc.readthedocs.io/en/stable/contributors_guide/index.html).
-
-
-### Acceptance tests
-
-This module includes [Beaker](https://github.com/puppetlabs/beaker) acceptance tests using the SIMP [Beaker Helpers](https://github.com/simp/rubygem-simp-beaker-helpers).  By default the tests use [Vagrant](https://www.vagrantup.com/) with [VirtualBox](https://www.virtualbox.org) as a back-end; Vagrant and VirtualBox must both be installed to run these tests without modification. To execute the tests run the following:
-
-```shell
-bundle install
-bundle exec rake beaker:suites
-```
-
-Please refer to the [SIMP Beaker Helpers documentation](https://github.com/simp/rubygem-simp-beaker-helpers/blob/master/README.md) for more information.
