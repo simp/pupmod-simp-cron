@@ -12,8 +12,8 @@ define cron::user {
     content =>  "${name}\n"
   }
 
-  pam::access::manage { "cron_user_${l_name}":
-    users   => $l_name,
+  pam::access::rule { "cron_user_${l_name}":
+    users   => [$l_name],
     origins => ['cron', 'crond']
   }
 
