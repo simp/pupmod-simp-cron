@@ -3,8 +3,10 @@
 # @param name
 #   The user to add to /etc/cron.allow
 #
-define cron::user {
-  include '::cron'
+define cron::user (
+  Boolean $pam = simplib::lookup('simp_options::pam', { 'default_value' => false }),
+) {
+  include 'cron'
 
   $l_name = regsubst($name,'/','__')
 
@@ -12,9 +14,11 @@ define cron::user {
     content =>  "${name}\n"
   }
 
-  pam::access::rule { "cron_user_${l_name}":
-    users   => [$l_name],
-    origins => ['cron', 'crond']
+  if $pam {
+    pam::access::rule { "cron_user_${l_name}":
+      users   => [$l_name],
+      origins => ['cron', 'crond']
+    }
   }
 
 }
