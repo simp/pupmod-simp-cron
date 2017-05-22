@@ -27,7 +27,6 @@ class cron (
     owner     => 'root',
     group     => 'root',
     mode      => '0600',
-    audit     => 'content',
     subscribe => Simpcat_build['cron']
   }
 
