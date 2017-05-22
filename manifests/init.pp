@@ -12,9 +12,9 @@ class cron (
 ) {
 
   $users.each |String $user| {
-    ::cron::user { $user: }
+    cron::user { $user: }
   }
-  ::cron::user { 'root': }
+  cron::user { 'root': }
 
   simpcat_build { 'cron':
     order            => ['*.user'],
@@ -27,7 +27,6 @@ class cron (
     owner     => 'root',
     group     => 'root',
     mode      => '0600',
-    audit     => 'content',
     subscribe => Simpcat_build['cron']
   }
 
