@@ -2,6 +2,7 @@
 - Removed deprecated audit metaparameter
 - Added basic acceptance test
 - Made sure the cron::user class doesn't use the pam module if pam is false
+- Update puppet dependency and remove OBE pe dependency in metadata.json
 
 * Thu Dec 8 2016 Nick Miller <nick.miller@onxypoint.com> - 0.0.1
 - First cut
