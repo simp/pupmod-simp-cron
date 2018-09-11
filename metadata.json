@@ -1,6 +1,6 @@
 {
   "name": "simp-cron",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": "SIMP Team",
   "summary": "A SIMP Puppet module for managing cron",
   "license": "Apache-2.0",
@@ -54,8 +54,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 4.10.4 < 6.0.0"
     }
-  ],
-  "data_provider": "hiera"
+  ]
 }

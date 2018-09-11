@@ -1,4 +1,7 @@
-* Thu Mar 29 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.0.3
+* Fri Sep 07 2018 Liz Nemsick <lnemsick.simp@gmail.com> - 0.1.0
+- Update Hiera 4 to Hiera 5
+
+* Thu Mar 29 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.1.0
 - Added OEL and Puppet 5 support
 
 * Fri May 19 2017 Nick Miller <nick.miller@onyxpoint.com> - 0.0.2
