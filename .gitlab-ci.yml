@@ -132,7 +132,7 @@ variables:
 #=======================================================================
 
 sanity_checks:
-  <<: *pup_5_latest
+  <<: *pup_latest
   <<: *setup_bundler_env
   stage: 'sanity'
   tags: ['docker']
