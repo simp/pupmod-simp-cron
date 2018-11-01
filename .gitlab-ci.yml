@@ -101,8 +101,7 @@ variables:
     BEAKER_PUPPET_COLLECTION: 'puppet5'
     MATRIX_RUBY_VERSION: '2.4'
 
-# jobs
-# --------------------------------------
+
 .lint_tests: &lint_tests
   stage: 'validation'
   tags: ['docker']
@@ -128,6 +127,7 @@ variables:
   tags: ['beaker']
   <<: *setup_bundler_env
 
+
 # Pipeline / testing matrix
 #=======================================================================
 
@@ -147,58 +147,71 @@ pup4-lint:
   <<: *pup_4_latest
   <<: *lint_tests
 
-pup5-lint:
+pup-current-lint:
+  <<: *pup_current
+  <<: *lint_tests
+
+pup-latest-lint:
   <<: *pup_latest
   <<: *lint_tests
+
 
 pup4.10-unit:
   <<: *pup_4_10_X
   <<: *unit_tests
 
-pe2018-unit:
+pe-current-unit:
   <<: *pe_current
   <<: *unit_tests
 
-pup5.5-unit:
+pup-current-unit:
   <<: *pup_current
   <<: *unit_tests
 
-pup5.latest-unit:
+pup-latest-unit:
   <<: *pup_latest
   <<: *unit_tests
 
-pup4.10-acceptance:
+
+pup4.10-default:
   <<: *pup_4_10_X
   <<: *acceptance_base
   script:
     - 'bundle exec rake beaker:suites'
 
-pup4.10-fips-acceptance:
+pup4.10-fips-default:
   <<: *pup_4_10_X
   <<: *acceptance_base
   <<: *only_with_SIMP_FULL_MATRIX
   script:
     - 'BEAKER_fips=yes bundle exec rake beaker:suites'
 
-default_current_acceptance:
+pup-current-default:
   <<: *pup_current
   <<: *acceptance_base
   script:
     - 'bundle exec rake beaker:suites'
 
-default_current-fips-acceptance:
+pup-current-fips-default:
   <<: *pup_current
   <<: *acceptance_base
   script:
     - 'BEAKER_fips=yes bundle exec rake beaker:suites'
 
-default_current-oel-acceptance:
+pup-current-oel-default:
   <<: *pup_current
   <<: *acceptance_base
   script:
     - 'bundle exec rake beaker:suites[default,oel]'
 
-#compliance-current-fips:
+pup-current-oel-fips-default:
+  <<: *pup_current
+  <<: *acceptance_base
+  <<: *only_with_SIMP_FULL_MATRIX
+  script:
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,oel]'
+
+#pup-current-fips-compliance:
 #  <<: *pup_current
 #  <<: *compliance_base
 #  script:
