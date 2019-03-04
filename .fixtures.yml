@@ -1,12 +1,8 @@
 ---
 fixtures:
   repositories:
-    concat:
-      # master is beyond 4.1.1, but has breaking changes to
-      # how fragments are ordered (MODULES-6625)
-      repo: https://github.com/simp/puppetlabs-concat
-      ref: 4.1.1
-    oddjob: "https://github.com/simp/pupmod-simp-oddjob"
+    concat: "https://github.com/simp/puppetlabs-concat.git"
+    oddjob: "https://github.com/simp/pupmod-simp-oddjob.git"
     pam: "https://github.com/simp/pupmod-simp-pam.git"
     stdlib: "https://github.com/simp/puppetlabs-stdlib.git"
     simplib: "https://github.com/simp/pupmod-simp-simplib.git"
