@@ -16,18 +16,12 @@ class cron (
   }
   cron::user { 'root': }
 
-  simpcat_build { 'cron':
-    order            => ['*.user'],
-    clean_whitespace => 'leading',
-    target           => '/etc/cron.allow'
-  }
-
-  file { '/etc/cron.allow':
-    ensure    => 'present',
-    owner     => 'root',
-    group     => 'root',
-    mode      => '0600',
-    subscribe => Simpcat_build['cron']
+  concat { '/etc/cron.allow':
+    order          => 'alpha',
+    owner          => 'root',
+    group          => 'root',
+    mode           => '0600',
+    ensure_newline => true
   }
 
   file { '/etc/cron.deny':

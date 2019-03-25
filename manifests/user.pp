@@ -8,10 +8,12 @@ define cron::user (
 ) {
   include 'cron'
 
-  $l_name = regsubst($name,'/','__')
+  $_name = inline_template("<%= @name.strip %>")
+  $l_name = regsubst($_name,'/','__')
 
-  simpcat_fragment { "cron+${l_name}.user":
-    content =>  "${name}\n"
+  concat_fragment { "cron+${l_name}.user":
+    target  => '/etc/cron.allow',
+    content => $_name
   }
 
   if $pam {
