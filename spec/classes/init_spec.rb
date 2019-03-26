@@ -12,7 +12,7 @@ describe 'cron' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('cron') }
           it { is_expected.to create_cron__user('root') }
-          it { is_expected.to create_simpcat_build('cron') }
+          it { is_expected.to create_concat('/etc/cron.allow') }
           it { is_expected.to create_file('/etc/cron.deny').with({:ensure => 'absent'}) }
           it { is_expected.to create_service('crond').with({
             :ensure     => 'running',

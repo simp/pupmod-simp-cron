@@ -9,7 +9,7 @@ describe 'cron::user' do
 
       context 'with default parameters' do
         let(:title) { 'foobar' }
-        it { is_expected.to create_simpcat_fragment('cron+foobar.user') }
+        it { is_expected.to create_concat_fragment('cron+foobar.user') }
         it { is_expected.not_to create_pam__access__rule('cron_user_foobar') }
       end
 
@@ -21,7 +21,12 @@ describe 'cron::user' do
 
       context 'with a title that needs gsubbin' do
         let(:title) { 'foo/bar' }
-        it { is_expected.to create_simpcat_fragment('cron+foo__bar.user') }
+        it { is_expected.to create_concat_fragment('cron+foo__bar.user').with_content('foo/bar') }
+      end
+
+      context 'with a title that has spaces' do
+        let(:title) { ' foobar' }
+        it { is_expected.to create_concat_fragment('cron+foobar.user').with_content('foobar') }
       end
 
     end
