@@ -8,7 +8,7 @@ define cron::user (
 ) {
   include 'cron'
 
-  $_name = inline_template("<%= @name.strip %>")
+  $_name = strip($name)
   $l_name = regsubst($_name,'/','__')
 
   concat_fragment { "cron+${l_name}.user":
