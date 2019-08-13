@@ -1,3 +1,9 @@
+* Fri Aug 02 2019 Robert Vincent <pillarsdotnet@gmail.com> - 0.2.0
+- Remove Puppet 4 support
+- Add Puppet 6 support
+- Add puppetlabs-stdlib 6 support
+- Add puppetlabs/concat 6 support
+
 * Mon Mar 25 2019 Jeanne Greulich  <jeanne.greulich@onyxpoint.com> - 0.1.2
 - Replace simpcat with concat
 
