@@ -1,20 +1,44 @@
-# This class manages /etc/cron.allow and /etc/cron.deny and the
-# crond service.
+# @summary Manages /etc/cron.allow and /etc/cron.deny, the cron packages, and the cron service.
 #
 # @param install_tmpwatch
-#   Force installation of the tmpwatch package.
+#   Force installation of the tmpwatch package
+#
+#   * In module data
+#
+# @param manage_packages
+#   Enable management of the cron-related packages
+#
 # @param users
-#   An array of additional cron users, using the defiend type cron::user.
+#   An array of additional cron users, using the defiend type cron::user
+#
+# @param add_root_user
+#   Ensure that the root user is added to the catalog by default
 #
 class cron (
-  Boolean       $install_tmpwatch = false,
-  Array[String] $users            = []
+  Boolean          $install_tmpwatch,
+  Boolean          $manage_packages = true,
+  Array[String[1]] $users           = [],
+  Boolean          $add_root_user   = true
 ) {
 
-  $users.each |String $user| {
-    cron::user { $user: }
+  include cron::service
+
+  if $manage_packages {
+    include cron::install
+
+    Class['cron::install'] -> Class['cron::service']
   }
-  cron::user { 'root': }
+
+  if $add_root_user {
+    $_users = unique($users + ['root'])
+  }
+  else {
+    $_users = $users
+  }
+
+  $_users.each |String $_user| {
+    cron::user { $_user: }
+  }
 
   concat { '/etc/cron.allow':
     order          => 'alpha',
@@ -26,17 +50,5 @@ class cron (
 
   file { '/etc/cron.deny':
     ensure => 'absent'
-  }
-
-  # CCE-27070-2
-  service { 'crond':
-    ensure     => 'running',
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true
-  }
-
-  if $install_tmpwatch {
-    package { 'tmpwatch': ensure => latest }
   }
 }

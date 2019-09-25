@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe 'cron' do
   context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
+    on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          facts
+          os_facts
         end
 
         context 'with default parameters' do
@@ -20,6 +20,7 @@ describe 'cron' do
             :hasstatus  => true,
             :hasrestart => true
           }) }
+          it { is_expected.to create_package('cronie') }
         end
 
         context 'with a users parameter' do
@@ -31,14 +32,23 @@ describe 'cron' do
           it { is_expected.to create_cron__user('bar') }
         end
 
-        context 'only install tmpwatch on el6' do
-          if facts[:os][:release][:major] == 6
+        context 'when choosing to install tmpwatch' do
+          if os_facts[:os][:release][:major] == '6'
             it { is_expected.to create_package('tmpwatch') }
           else
             it { is_expected.not_to create_package('tmpwatch') }
           end
         end
 
+        context 'when not managing packages' do
+          let(:params) {{
+            :install_tmpwatch => true,
+            :manage_packages  => false
+          }}
+
+          it { is_expected.to_not create_package('tmpwatch') }
+          it { is_expected.to_not create_package('cronie') }
+        end
       end
     end
   end

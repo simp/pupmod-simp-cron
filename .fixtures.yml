@@ -1,10 +1,11 @@
 ---
 fixtures:
   repositories:
-    concat: "https://github.com/simp/puppetlabs-concat.git"
-    oddjob: "https://github.com/simp/pupmod-simp-oddjob.git"
-    pam: "https://github.com/simp/pupmod-simp-pam.git"
-    stdlib: "https://github.com/simp/puppetlabs-stdlib.git"
-    simplib: "https://github.com/simp/pupmod-simp-simplib.git"
+    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
+    concat: https://github.com/simp/puppetlabs-concat.git
+    oddjob: https://github.com/simp/pupmod-simp-oddjob.git
+    pam: https://github.com/simp/pupmod-simp-pam.git
+    stdlib: https://github.com/simp/puppetlabs-stdlib.git
+    simplib: https://github.com/simp/pupmod-simp-simplib.git
   symlinks:
     cron: "#{source_dir}"

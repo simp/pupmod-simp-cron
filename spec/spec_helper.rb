@@ -9,14 +9,6 @@ require 'pathname'
 fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
 module_name = File.basename(File.expand_path(File.join(__FILE__,'../..')))
 
-# Add fixture lib dirs to LOAD_PATH. Work-around for PUP-3336
-if Puppet.version < "4.0.0"
-  Dir["#{fixture_path}/modules/*/lib"].entries.each do |lib_dir|
-    $LOAD_PATH << lib_dir
-  end
-end
-
-
 if !ENV.key?( 'TRUSTED_NODE_DATA' )
   warn '== WARNING: TRUSTED_NODE_DATA is unset, using TRUSTED_NODE_DATA=yes'
   ENV['TRUSTED_NODE_DATA']='yes'
@@ -24,16 +16,19 @@ end
 
 default_hiera_config =<<-EOM
 ---
-:backends:
-  - "rspec"
-  - "yaml"
-:yaml:
-  :datadir: "stub"
-:hierarchy:
-  - "%{custom_hiera}"
-  - "%{spec_title}"
-  - "%{module_name}"
-  - "default"
+version: 5
+hierarchy:
+  - name: SIMP Compliance Engine
+    lookup_key: compliance_markup::enforcement
+  - name: Custom Test Hiera
+    path: "%{custom_hiera}.yaml"
+  - name: "%{module_name}"
+    path: "%{module_name}.yaml"
+  - name: Common
+    path: default.yaml
+defaults:
+  data_hash: yaml_data
+  datadir: "stub"
 EOM
 
 # This can be used from inside your spec tests to set the testable environment.
@@ -47,7 +42,7 @@ EOM
 # end
 #
 def set_environment(environment = :production)
-    RSpec.configure { |c| c.default_facts['environment'] = environment.to_s }
+  RSpec.configure { |c| c.default_facts['environment'] = environment.to_s }
 end
 
 # This can be used from inside your spec tests to load custom hieradata within
@@ -69,7 +64,7 @@ end
 #
 # Note: Any colons (:) are replaced with underscores (_) in the class name.
 def set_hieradata(hieradata)
-    RSpec.configure { |c| c.default_facts['custom_hiera'] = hieradata }
+  RSpec.configure { |c| c.default_facts['custom_hiera'] = hieradata }
 end
 
 if not File.directory?(File.join(fixture_path,'hieradata')) then
@@ -89,6 +84,8 @@ RSpec.configure do |c|
       :concat_basedir => '/tmp'
     }
   }
+
+  c.trusted_server_facts = true
 
   c.mock_framework = :rspec
   c.mock_with :mocha
@@ -112,7 +109,15 @@ RSpec.configure do |c|
 
   c.before(:all) do
     data = YAML.load(default_hiera_config)
-    data[:yaml][:datadir] = File.join(fixture_path, 'hieradata')
+    data.keys.each do |key|
+      next unless data[key].is_a?(Hash)
+
+      if data[key][:datadir] == 'stub'
+        data[key][:datadir] = File.join(fixture_path, 'hieradata')
+      elsif data[key]['datadir'] == 'stub'
+        data[key]['datadir'] = File.join(fixture_path, 'hieradata')
+      end
+    end
 
     File.open(c.hiera_config, 'w') do |f|
       f.write data.to_yaml
@@ -144,6 +149,28 @@ RSpec.configure do |c|
     # clean up the mocked environmentpath
     FileUtils.rm_rf(@spec_global_env_temp)
     @spec_global_env_temp = nil
+  end
+
+  if ENV['RSPEC_TIME']
+    c.before(:all) do
+      @suite_start_time = Time.now
+    end
+
+    c.before(:context) do
+      @context_start_time = Time.now
+    end
+
+    c.before(:example) do
+      @example_start_time = Time.now
+    end
+
+    c.after(:all) do
+      puts("TIME FOR SUITE '#{self.class.description}': #{Time.now - @suite_start_time}")
+    end
+
+    c.after(:context) do
+      puts("TIME FOR CONTEXT '#{self.class.description}': #{Time.now - @context_start_time}")
+    end
   end
 end
 
