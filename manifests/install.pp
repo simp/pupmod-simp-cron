@@ -13,10 +13,12 @@
 #
 class cron::install(
   Boolean          $install_tmpwatch,
-  Array[String[1]] $cron_packages  = ['cronie'],
-  String[1]        $package_ensure = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })
+  Array[String[1]] $cron_packages    = ['cronie'],
+  String[1]        $package_ensure   = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })
 ) {
-  if $cron::install_tmpwatch {
+  assert_private()
+
+  if $install_tmpwatch {
     $_cron_packages = unique($cron_packages + ['tmpwatch'])
   }
   else {

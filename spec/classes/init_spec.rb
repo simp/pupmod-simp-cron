@@ -11,16 +11,18 @@ describe 'cron' do
         context 'with default parameters' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('cron') }
+          it { is_expected.to contain_class('cron::install')}
+          it { is_expected.to contain_class('cron::service')}
           it { is_expected.to create_cron__user('root') }
           it { is_expected.to create_concat('/etc/cron.allow') }
           it { is_expected.to create_file('/etc/cron.deny').with({:ensure => 'absent'}) }
-          it { is_expected.to create_service('crond').with({
-            :ensure     => 'running',
-            :enable     => true,
-            :hasstatus  => true,
-            :hasrestart => true
-          }) }
+          #defaults for install
           it { is_expected.to create_package('cronie') }
+          if os_facts[:os][:release][:major] == '6'
+            it { is_expected.to create_package('tmpwatch') }
+          else
+            it { is_expected.not_to create_package('tmpwatch') }
+          end
         end
 
         context 'with a users parameter' do
@@ -32,14 +34,6 @@ describe 'cron' do
           it { is_expected.to create_cron__user('bar') }
         end
 
-        context 'when choosing to install tmpwatch' do
-          if os_facts[:os][:release][:major] == '6'
-            it { is_expected.to create_package('tmpwatch') }
-          else
-            it { is_expected.not_to create_package('tmpwatch') }
-          end
-        end
-
         context 'when not managing packages' do
           let(:params) {{
             :install_tmpwatch => true,
@@ -48,6 +42,13 @@ describe 'cron' do
 
           it { is_expected.to_not create_package('tmpwatch') }
           it { is_expected.to_not create_package('cronie') }
+        end
+
+        context 'when add_root_user is false' do
+          let(:params) {{
+            :add_root_user => false
+          }}
+          it { is_expected.to_not create_cron__user('root') }
         end
       end
     end
