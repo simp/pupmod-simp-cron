@@ -9,7 +9,8 @@
 #   Enable management of the cron-related packages
 #
 # @param users
-#   An array of additional cron users, using the defiend type cron::user
+#   An array additional cron users to be allowed, using the defined type
+#   cron::user
 #
 # @param add_root_user
 #   Ensure that the root user is added to the catalog by default
