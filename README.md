@@ -6,14 +6,19 @@
 
 #### Table of Contents
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with cron](#setup)
-    * [What cron affects](#what-cron-affects)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
 
+<!-- vim-markdown-toc GFM -->
+
+* [Description](#description)
+  * [This is a SIMP module](#this-is-a-simp-module)
+* [Setup](#setup)
+  * [What cron affects](#what-cron-affects)
+* [Usage](#usage)
+* [Reference](#reference)
+* [Limitations](#limitations)
+* [Development](#development)
+
+<!-- vim-markdown-toc -->
 
 ## Description
 
@@ -64,12 +69,15 @@ cron::users:
 
 ## Reference
 
-Please refer to the inline documentation within each source file, or to the module's generated YARD documentation for reference material.
+See [REFERENCE.md](./REFERENCE.md) for details.
 
 
 ## Limitations
 
-SIMP Puppet modules are generally intended for use on Red Hat Enterprise Linux and compatible distributions, such as CentOS. Please see the [`metadata.json` file](./metadata.json) for the most up-to-date list of supported operating systems, Puppet versions, and module dependencies.
+SIMP Puppet modules are generally intended for use on Red Hat Enterprise Linux
+and compatible distributions, such as CentOS. Please see the [`metadata.json` file](./metadata.json)
+for the most up-to-date list of supported operating systems, Puppet versions,
+and module dependencies.
 
 
 ## Development
