@@ -1,8 +1,9 @@
-* Wed Sep 25 2019 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.2.0
+* Wed Dec 11 2019 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.2.0
 - Minor code refactor
 - Manage cron packages by default
 - Update supported version of simp-simplib
-- Add RHEL 8 support
+- Add EL8 support
+- Move PAM to an optional dependency
 
 * Fri Aug 02 2019 Robert Vincent <pillarsdotnet@gmail.com> - 0.2.0
 - Remove Puppet 4 support

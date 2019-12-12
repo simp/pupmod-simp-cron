@@ -3,6 +3,9 @@
 # @param name
 #   The user to add to /etc/cron.allow
 #
+# @param pam
+#   Add a `pam::access::rule` entry for `$name` to allow shell/login access
+#
 define cron::user (
   Boolean $pam = simplib::lookup('simp_options::pam', { 'default_value' => false })
 ) {
@@ -17,6 +20,8 @@ define cron::user (
   }
 
   if $pam {
+    simplib::assert_optional_dependency($module_name, 'simp/pam')
+
     pam::access::rule { "cron_user_${safe_name}":
       users   => [$_name],
       origins => ['cron', 'crond']
