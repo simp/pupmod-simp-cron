@@ -16,7 +16,7 @@ HOSTS:
     hypervisor: <%= hypervisor %>
     yum_repos:
       chef-current:
-        baseurl: 'https://packages.chef.io/repos/yum/current/el/7/$basearch'
+        baseurl: 'https://packages.chef.io/repos/yum/current/el/6/$basearch'
         gpgkeys:
           - https://packages.chef.io/chef.asc
 
@@ -40,7 +40,7 @@ HOSTS:
     hypervisor: <%= hypervisor %>
     yum_repos:
       chef-current:
-        baseurl: 'https://packages.chef.io/repos/yum/current/el/7/$basearch'
+        baseurl: 'https://packages.chef.io/repos/yum/current/el/8/$basearch'
         gpgkeys:
           - https://packages.chef.io/chef.asc
 
