@@ -18,11 +18,7 @@ describe 'cron' do
           it { is_expected.to create_file('/etc/cron.deny').with({:ensure => 'absent'}) }
           #defaults for install
           it { is_expected.to create_package('cronie') }
-          if os_facts[:os][:release][:major] == '6'
-            it { is_expected.to create_package('tmpwatch') }
-          else
-            it { is_expected.not_to create_package('tmpwatch') }
-          end
+          it { is_expected.not_to create_package('tmpwatch') }
         end
 
         context 'with a users parameter' do
