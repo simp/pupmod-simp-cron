@@ -1,6 +1,0 @@
----
-# Set cron::install::install_tmpwatch from cron::install_tmpwatch
-# for backwards compatability.
-#
-cron::install_tmpwatch: true
-cron::install::install_tmpwatch: "%{alias('cron::install_tmpwatch')}"
