@@ -7,12 +7,12 @@
 ### Classes
 
 * [`cron`](#cron): Manages /etc/cron.allow and /etc/cron.deny, the cron packages, and the cron service.
-* [`cron::install`](#croninstall): Installs cron
-* [`cron::service`](#cronservice): Manages the cron service
+* [`cron::install`](#cron--install): Installs cron
+* [`cron::service`](#cron--service): Manages the cron service
 
 ### Defined types
 
-* [`cron::user`](#cronuser): Add the user $name to /etc/cron.allow
+* [`cron::user`](#cron--user): Add the user $name to /etc/cron.allow
 
 ## Classes
 
@@ -24,12 +24,12 @@ Manages /etc/cron.allow and /etc/cron.deny, the cron packages, and the cron serv
 
 The following parameters are available in the `cron` class:
 
-* [`install_tmpwatch`](#install_tmpwatch)
-* [`manage_packages`](#manage_packages)
-* [`users`](#users)
-* [`add_root_user`](#add_root_user)
+* [`install_tmpwatch`](#-cron--install_tmpwatch)
+* [`manage_packages`](#-cron--manage_packages)
+* [`users`](#-cron--users)
+* [`add_root_user`](#-cron--add_root_user)
 
-##### <a name="install_tmpwatch"></a>`install_tmpwatch`
+##### <a name="-cron--install_tmpwatch"></a>`install_tmpwatch`
 
 Data type: `Boolean`
 
@@ -37,15 +37,15 @@ Force installation of the tmpwatch package
 
 * In module data
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-cron--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Enable management of the cron-related packages
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="users"></a>`users`
+##### <a name="-cron--users"></a>`users`
 
 Data type: `Array[String[1]]`
 
@@ -54,15 +54,15 @@ cron::user
 
 Default value: `[]`
 
-##### <a name="add_root_user"></a>`add_root_user`
+##### <a name="-cron--add_root_user"></a>`add_root_user`
 
 Data type: `Boolean`
 
 Ensure that the root user is added to the catalog by default
 
-Default value: ``true``
+Default value: `true`
 
-### <a name="croninstall"></a>`cron::install`
+### <a name="cron--install"></a>`cron::install`
 
 Installs cron
 
@@ -70,11 +70,11 @@ Installs cron
 
 The following parameters are available in the `cron::install` class:
 
-* [`install_tmpwatch`](#install_tmpwatch)
-* [`cron_packages`](#cron_packages)
-* [`package_ensure`](#package_ensure)
+* [`install_tmpwatch`](#-cron--install--install_tmpwatch)
+* [`cron_packages`](#-cron--install--cron_packages)
+* [`package_ensure`](#-cron--install--package_ensure)
 
-##### <a name="install_tmpwatch"></a>`install_tmpwatch`
+##### <a name="-cron--install--install_tmpwatch"></a>`install_tmpwatch`
 
 Data type: `Boolean`
 
@@ -82,7 +82,7 @@ Whether or not to install the 'tmpwatch' package
 
 * In module data
 
-##### <a name="cron_packages"></a>`cron_packages`
+##### <a name="-cron--install--cron_packages"></a>`cron_packages`
 
 Data type: `Array[String[1]]`
 
@@ -90,7 +90,7 @@ The packages required for cron
 
 Default value: `['cronie']`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-cron--install--package_ensure"></a>`package_ensure`
 
 Data type: `String[1]`
 
@@ -98,7 +98,7 @@ The `ensure` parameter for installed packages
 
 Default value: `simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })`
 
-### <a name="cronservice"></a>`cron::service`
+### <a name="cron--service"></a>`cron::service`
 
 Manages the cron service
 
@@ -106,10 +106,10 @@ Manages the cron service
 
 The following parameters are available in the `cron::service` class:
 
-* [`service_name`](#service_name)
-* [`enable`](#enable)
+* [`service_name`](#-cron--service--service_name)
+* [`enable`](#-cron--service--enable)
 
-##### <a name="service_name"></a>`service_name`
+##### <a name="-cron--service--service_name"></a>`service_name`
 
 Data type: `String[1]`
 
@@ -117,17 +117,17 @@ The name of the service
 
 Default value: `'crond'`
 
-##### <a name="enable"></a>`enable`
+##### <a name="-cron--service--enable"></a>`enable`
 
 Data type: `Boolean`
 
 Enable the `$service_name` service
 
-Default value: ``true``
+Default value: `true`
 
 ## Defined types
 
-### <a name="cronuser"></a>`cron::user`
+### <a name="cron--user"></a>`cron::user`
 
 Add the user $name to /etc/cron.allow
 
@@ -135,14 +135,14 @@ Add the user $name to /etc/cron.allow
 
 The following parameters are available in the `cron::user` defined type:
 
-* [`name`](#name)
-* [`pam`](#pam)
+* [`name`](#-cron--user--name)
+* [`pam`](#-cron--user--pam)
 
-##### <a name="name"></a>`name`
+##### <a name="-cron--user--name"></a>`name`
 
 The user to add to /etc/cron.allow
 
-##### <a name="pam"></a>`pam`
+##### <a name="-cron--user--pam"></a>`pam`
 
 Data type: `Boolean`
 
