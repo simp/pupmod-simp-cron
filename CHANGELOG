@@ -1,5 +1,5 @@
-* Wed Feb 07 2024 Steven Pritchard <steve@sicura.us> - 0.8.0
-- [puppetsync] Add EL9 support
+* Wed Feb 07 2024 Mike Riddle <mike@sicura.us> - 0.8.0
+- [puppetsync] Update metadata upper bounds for puppet-nsswitch, puppet-gitlab, puppet-snmp, simp-pam, and simp-useradd
 
 * Wed Jan 17 2024 Richard Gardner <rick@sicura.us> - 0.7.1
 - Updated hiera.yaml facts to support puppet 8
