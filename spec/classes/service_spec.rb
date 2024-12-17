@@ -9,30 +9,33 @@ describe 'cron::service' do
         end
 
         context 'with default parameters' do
-          it { is_expected.to create_service('crond').with({
-            :ensure => 'running',
-            :enable => true,
-            :hasstatus => true,
-            :hasrestart => true
-            })
+          it {
+            is_expected.to create_service('crond').with({
+                                                          ensure: 'running',
+            enable: true,
+            hasstatus: true,
+            hasrestart: true
+                                                        })
           }
         end
 
         context 'with parameters' do
-          let(:params) {{
-            :service_name => 'trevor',
-            :enable => false
-          }}
+          let(:params) do
+            {
+              service_name: 'trevor',
+           enable: false
+            }
+          end
 
-          it { is_expected.to create_service('trevor').with({
-            :ensure => 'stopped',
-            :enable => false,
-            :hasstatus => true,
-            :hasrestart => true
-            })
+          it {
+            is_expected.to create_service('trevor').with({
+                                                           ensure: 'stopped',
+            enable: false,
+            hasstatus: true,
+            hasrestart: true
+                                                         })
           }
         end
-
       end
     end
   end
