@@ -3,12 +3,12 @@ require 'spec_helper_acceptance'
 test_name 'cron'
 
 describe 'cron class' do
-  let(:manifest) {
+  let(:manifest) do
     <<-EOS
       include 'cron'
     EOS
-  }
-  let(:manifest_users) {
+  end
+  let(:manifest_users) do
     <<-EOS
       class {'cron':
         users => [' joe', 'emily']
@@ -16,28 +16,28 @@ describe 'cron class' do
 
       cron::user { ' nick ':}
     EOS
-  }
-  let(:expected_content) {
+  end
+  let(:expected_content) do
     <<-EOS
 emily
 joe
 nick
 root
     EOS
-  }
+  end
 
   context 'on each host' do
     hosts.each do |host|
-      it 'should work with default values' do
-        apply_manifest_on(host, manifest, :catch_failures => true)
+      it 'works with default values' do
+        apply_manifest_on(host, manifest, catch_failures: true)
       end
 
-      it 'should be idempotent' do
-        apply_manifest_on(host, manifest, :catch_changes => true)
+      it 'is idempotent' do
+        apply_manifest_on(host, manifest, catch_changes: true)
       end
 
-      it 'should add users' do
-        apply_manifest_on(host, manifest_users, :catch_failures => true)
+      it 'adds users' do
+        apply_manifest_on(host, manifest_users, catch_failures: true)
         on(host, 'cat /etc/cron.allow') do
           expect(stdout).to match(expected_content)
         end
