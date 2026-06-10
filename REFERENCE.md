@@ -28,6 +28,7 @@ The following parameters are available in the `cron` class:
 * [`manage_packages`](#-cron--manage_packages)
 * [`users`](#-cron--users)
 * [`add_root_user`](#-cron--add_root_user)
+* [`cron_deny_ensure`](#-cron--cron_deny_ensure)
 
 ##### <a name="-cron--install_tmpwatch"></a>`install_tmpwatch`
 
@@ -61,6 +62,14 @@ Data type: `Boolean`
 Ensure that the root user is added to the catalog by default
 
 Default value: `true`
+
+##### <a name="-cron--cron_deny_ensure"></a>`cron_deny_ensure`
+
+Data type: `Enum['absent', 'present']`
+
+The `ensure` value for `/etc/cron.deny`
+
+Default value: `'present'`
 
 ### <a name="cron--install"></a>`cron::install`
 
@@ -149,4 +158,3 @@ Data type: `Boolean`
 Add a `pam::access::rule` entry for `$name` to allow shell/login access
 
 Default value: `simplib::lookup('simp_options::pam', { 'default_value' => false })`
-

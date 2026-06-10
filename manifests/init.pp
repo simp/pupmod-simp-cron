@@ -15,11 +15,15 @@
 # @param add_root_user
 #   Ensure that the root user is added to the catalog by default
 #
+# @param cron_deny_ensure
+#   The `ensure` value for `/etc/cron.deny`
+#
 class cron (
   Boolean          $install_tmpwatch,
   Boolean          $manage_packages = true,
   Array[String[1]] $users           = [],
-  Boolean          $add_root_user   = true
+  Boolean          $add_root_user   = true,
+  Enum['absent', 'present'] $cron_deny_ensure = 'present'
 ) {
 
   include cron::service
@@ -50,6 +54,6 @@ class cron (
   }
 
   file { '/etc/cron.deny':
-    ensure => 'absent'
+    ensure => $cron_deny_ensure
   }
 }

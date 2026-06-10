@@ -66,6 +66,12 @@ cron::users:
   - bar
 ```
 
+By default, this module ensures `/etc/cron.deny` is present. To override:
+
+```yaml
+cron::cron_deny_ensure: 'absent'
+```
+
 
 ## Reference
 

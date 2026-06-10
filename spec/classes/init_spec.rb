@@ -15,7 +15,7 @@ describe 'cron' do
           it { is_expected.to contain_class('cron::service') }
           it { is_expected.to create_cron__user('root') }
           it { is_expected.to create_concat('/etc/cron.allow') }
-          it { is_expected.to create_file('/etc/cron.deny').with({ ensure: 'absent' }) }
+          it { is_expected.to create_file('/etc/cron.deny').with({ ensure: 'present' }) }
           # defaults for install
           it { is_expected.to create_package('cronie') }
           it { is_expected.not_to create_package('tmpwatch') }
@@ -53,6 +53,16 @@ describe 'cron' do
           end
 
           it { is_expected.not_to create_cron__user('root') }
+        end
+
+        context 'when cron_deny_ensure is absent' do
+          let(:params) do
+            {
+              cron_deny_ensure: 'absent'
+            }
+          end
+
+          it { is_expected.to create_file('/etc/cron.deny').with({ ensure: 'absent' }) }
         end
       end
     end
