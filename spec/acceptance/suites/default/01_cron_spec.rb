@@ -38,9 +38,8 @@ root
 
       it 'adds users' do
         apply_manifest_on(host, manifest_users, catch_failures: true)
-        on(host, 'cat /etc/cron.allow') do
-          expect(stdout).to match(expected_content)
-        end
+        result = on(host, 'cat /etc/cron.allow')
+        expect(result.stdout).to match(expected_content)
       end
     end
   end
