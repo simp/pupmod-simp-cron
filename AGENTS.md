@@ -70,8 +70,8 @@ installs the cron packages.
 `cron::install::install_tmpwatch: "%{alias('cron::install_tmpwatch')}"`. This
 keeps the older top-level `cron::install_tmpwatch` key working as the source of
 truth for the `cron::install` class parameter of the same name. Both `cron` and
-`cron::install` declare `install_tmpwatch` with no default, so the value **must**
-come from Hiera — do not remove these data bindings.
+`cron::install` declare `install_tmpwatch` with no default, so the value must come
+from Hiera (for `include cron`) or be provided explicitly when declaring the class.
 
 ## Dependencies
 
