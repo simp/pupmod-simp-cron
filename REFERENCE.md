@@ -37,6 +37,8 @@ Force installation of the tmpwatch package
 
 * In module data
 
+Default value: `false`
+
 ##### <a name="-cron--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
@@ -81,6 +83,8 @@ Data type: `Boolean`
 Whether or not to install the 'tmpwatch' package
 
 * In module data
+
+Default value: `'%{alias('cron::install_tmpwatch')}'`
 
 ##### <a name="-cron--install--cron_packages"></a>`cron_packages`
 
