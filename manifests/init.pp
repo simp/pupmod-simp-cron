@@ -21,7 +21,6 @@ class cron (
   Array[String[1]] $users           = [],
   Boolean          $add_root_user   = true
 ) {
-
   include cron::service
 
   if $manage_packages {
