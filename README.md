@@ -66,6 +66,32 @@ cron::users:
   - bar
 ```
 
+By default, this module leaves `/etc/cron.deny` untouched. Note that this
+module always manages `/etc/cron.allow`, which cron consults first: when
+`cron.allow` exists, `cron.deny` is ignored entirely, so these parameters
+only matter for compliance scanners, not for actual cron access control.
+
+To manage the file for compliance, set any of the `cron::cron_deny_*`
+parameters; only the attributes you set are managed:
+
+```yaml
+cron::cron_deny_ensure: 'file'
+cron::cron_deny_owner: 'root'
+cron::cron_deny_group: 'root'
+cron::cron_deny_mode: '0600'
+```
+
+Include `cron_deny_ensure: 'file'` whenever you set the owner, group, or
+mode: managing only those attributes is a silent no-op when the file does
+not exist (Puppet skips them without error), and versions of this module
+prior to 2.0.0 removed `/etc/cron.deny` from every managed host.
+
+To have the module remove the file instead (the behavior prior to 2.0.0):
+
+```yaml
+cron::cron_deny_ensure: 'absent'
+```
+
 
 ## Reference
 

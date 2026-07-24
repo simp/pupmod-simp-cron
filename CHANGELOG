@@ -1,3 +1,12 @@
+* Fri Jul 24 2026 Nicholas Markowski <nicholas.markowski@onyxpoint.com> - 2.0.0
+- Add `cron::cron_deny_ensure`, `cron::cron_deny_owner`,
+  `cron::cron_deny_group`, and `cron::cron_deny_mode` to optionally manage
+  `/etc/cron.deny`. All default to `undef`; the file is left untouched unless
+  one is set, in which case only the specified attributes are managed.
+- BREAKING: `/etc/cron.deny` is now left unmanaged by default instead of
+  being removed. Sites that relied on the module removing the file must set
+  `cron::cron_deny_ensure: 'absent'` to restore the previous behavior.
+
 * Thu Jul 09 2026 Steven Pritchard <steve@sicura.us> - 1.0.1
 - Resolved puppet-lint manifest whitespace offenses
 
