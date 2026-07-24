@@ -28,6 +28,10 @@ The following parameters are available in the `cron` class:
 * [`manage_packages`](#-cron--manage_packages)
 * [`users`](#-cron--users)
 * [`add_root_user`](#-cron--add_root_user)
+* [`cron_deny_ensure`](#-cron--cron_deny_ensure)
+* [`cron_deny_owner`](#-cron--cron_deny_owner)
+* [`cron_deny_group`](#-cron--cron_deny_group)
+* [`cron_deny_mode`](#-cron--cron_deny_mode)
 
 ##### <a name="-cron--install_tmpwatch"></a>`install_tmpwatch`
 
@@ -63,6 +67,51 @@ Data type: `Boolean`
 Ensure that the root user is added to the catalog by default
 
 Default value: `true`
+
+##### <a name="-cron--cron_deny_ensure"></a>`cron_deny_ensure`
+
+Data type: `Optional[Enum['absent', 'file']]`
+
+The `ensure` value for `/etc/cron.deny`
+
+* Unmanaged by default (`undef`), leaving the system default in place
+* Set to `file` to manage the file or `absent` to remove it
+
+Default value: `undef`
+
+##### <a name="-cron--cron_deny_owner"></a>`cron_deny_owner`
+
+Data type: `Optional[String[1]]`
+
+The owner for `/etc/cron.deny`
+
+* Unmanaged by default (`undef`)
+
+Default value: `undef`
+
+##### <a name="-cron--cron_deny_group"></a>`cron_deny_group`
+
+Data type: `Optional[String[1]]`
+
+The group for `/etc/cron.deny`
+
+* Unmanaged by default (`undef`)
+
+Default value: `undef`
+
+##### <a name="-cron--cron_deny_mode"></a>`cron_deny_mode`
+
+Data type: `Optional[Stdlib::Filemode]`
+
+The file mode for `/etc/cron.deny`
+
+* Unmanaged by default (`undef`), leaving the system default in place
+* Set (e.g. `'0600'`) to enforce a mode for compliance
+
+`/etc/cron.deny` is left untouched unless one of the `cron_deny_*`
+parameters is set, in which case only the specified attributes are managed.
+
+Default value: `undef`
 
 ### <a name="cron--install"></a>`cron::install`
 

@@ -66,6 +66,23 @@ cron::users:
   - bar
 ```
 
+By default, this module leaves `/etc/cron.deny` untouched. To manage it for
+compliance, set any of the `cron::cron_deny_*` parameters; only the
+attributes you set are managed:
+
+```yaml
+cron::cron_deny_ensure: 'file'
+cron::cron_deny_owner: 'root'
+cron::cron_deny_group: 'root'
+cron::cron_deny_mode: '0600'
+```
+
+To have the module remove the file instead (the behavior prior to 2.0.0):
+
+```yaml
+cron::cron_deny_ensure: 'absent'
+```
+
 
 ## Reference
 
