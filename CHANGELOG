@@ -1,3 +1,6 @@
+* Mon Aug 24 2026 Steven Pritchard <steve@sicura.us> - 2.0.1
+- [puppetsync] Update metadata.json dependency ranges from the Forge
+
 * Fri Jul 24 2026 Nicholas Markowski <nicholas.markowski@onyxpoint.com> - 2.0.0
 - Add `cron::cron_deny_ensure`, `cron::cron_deny_owner`,
   `cron::cron_deny_group`, and `cron::cron_deny_mode` to optionally manage
