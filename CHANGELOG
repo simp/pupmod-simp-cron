@@ -1,3 +1,6 @@
+* Thu Sep 10 2026 Chris Tessmer <chris.tessmer@onyxpoint.com> - 2.0.2
+- Use `stdlib::ensure_packages` instead of deprecated (stdlib) `ensure_packages`
+
 * Mon Aug 24 2026 Steven Pritchard <steve@sicura.us> - 2.0.1
 - [puppetsync] Update metadata.json dependency ranges from the Forge
 

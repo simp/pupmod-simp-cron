@@ -25,5 +25,5 @@ class cron::install (
     $_cron_packages = $cron_packages
   }
 
-  ensure_packages($_cron_packages, { 'ensure' => $package_ensure })
+  stdlib::ensure_packages($_cron_packages, { 'ensure' => $package_ensure })
 }
