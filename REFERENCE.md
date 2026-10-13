@@ -202,4 +202,3 @@ Data type: `Boolean`
 Add a `pam::access::rule` entry for `$name` to allow shell/login access
 
 Default value: `simplib::lookup('simp_options::pam', { 'default_value' => false })`
-
